@@ -1,56 +1,97 @@
-# Welcome to your Expo app 👋
+````markdown
+# 💬 WhatsApp Clone — React Native
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A WhatsApp-inspired messaging interface built with React Native, Expo, and TypeScript. This project recreates the look and feel of WhatsApp with a focus on clean UI, reusable components, and interactive navigation.
 
-## Get started
+## ✨ Features
 
-1. Install dependencies
+- 💬 Chats screen with sample conversations
+- 🔍 Search contacts by name
+- 👤 Contact profile pictures and unread message badges
+- 🟢 Updates screen with sample status updates
+- 📞 Calls screen with recent call entries
+- 👥 Communities screen with sample communities
+- ⚙️ Settings screen with profile and settings options
+- ✉️ Interactive demo chat with local message state
+- 📱 React Native component-based architecture
+- 🌐 Web support through Expo
 
-   ```bash
-   npm install
-   ```
+## 🛠️ Tech Stack
 
-2. Start the app
+- React Native
+- React
+- TypeScript
+- Expo
+- Expo Router
+- React Hooks
+- Expo Vector Icons
 
-   ```bash
-   npx expo start
-   ```
+## 📂 Project Structure
 
-In the output, you'll find options to open the app in a
+```text
+src/
+├── app/
+│   ├── _layout.tsx
+│   ├── index.tsx
+│   └── explore.tsx
+└── components/
+    └── screens/
+        ├── ChatsScreen.tsx
+        ├── UpdatesScreen.tsx
+        ├── CallsScreen.tsx
+        ├── CommunitiesScreen.tsx
+        └── SettingsScreen.tsx
+````
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🚀 Getting Started
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### 1. Clone the repository
 
 ```bash
-npm run reset-project
+git clone YOUR_GITHUB_REPOSITORY_URL
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+### 2. Open the project folder
 
-### Other setup steps
+```bash
+cd YOUR_PROJECT_FOLDER
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+### 3. Install dependencies
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 4. Start the web app
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npx expo start --web
+```
 
-## Join the community
+The app will be available at the local URL shown in your terminal.
 
-Join our community of developers creating universal apps.
+## 🧪 Demo Limitations
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+This is a frontend portfolio project that uses sample data.
+
+* No backend or database is connected.
+* Messages are stored temporarily in component state.
+* Messages reset when the relevant component is remounted or the page is refreshed.
+* Calls, communities, and status updates are visual demonstrations.
+* No real calls, authentication, or real-time messaging are implemented.
+
+## 🎯 Project Goal
+
+The goal of this project is to practice React Native, TypeScript, component-based development, UI design, and web deployment using Expo.
+
+## 👨‍💻 Author
+
+Rayan
+
+## 📄 Disclaimer
+
+This is an independent educational project inspired by WhatsApp's interface. It is not affiliated with or endorsed by WhatsApp or Meta.
+
+```
+```
