@@ -1,98 +1,128 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import CallsScreen from "@/components/screens/CallsScreen";
+import ChatsScreen from "@/components/screens/ChatsScreen";
+import CommunitiesScreen from "@/components/screens/CommunitiesScreen";
+import SettingsScreen from "@/components/screens/SettingsScreen";
+import UpdatesScreen from "@/components/screens/UpdatesScreen";
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
-  return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+const tabs = [
+  { name: "Updates", icon: "ellipse-outline" },
+  { name: "Calls", icon: "call-outline" },
+  { name: "Communities", icon: "people-outline" },
+  { name: "Chats", icon: "chatbubble" },
+  { name: "Settings", icon: "settings-outline" },
+];
 
 export default function HomeScreen() {
+  const [activeTab, setActiveTab] = useState("Chats");
+
+  const renderScreen = () => {
+    switch (activeTab) {
+      case "Updates":
+        return <UpdatesScreen />;
+
+      case "Calls":
+        return <CallsScreen />;
+
+      case "Communities":
+        return <CommunitiesScreen />;
+
+      case "Settings":
+        return <SettingsScreen />;
+
+      default:
+        return <ChatsScreen />;
+    }
+  };
+
   return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+    <View style={styles.container}>
+      <View style={styles.screen}>{renderScreen()}</View>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+      <View style={styles.bottomNav}>
+        {tabs.map((tab) => (
+          <TouchableOpacity
+            key={tab.name}
+            style={styles.navItem}
+            onPress={() => setActiveTab(tab.name)}
+            activeOpacity={0.7}
+          >
+            <View
+              style={[
+                styles.iconContainer,
+                activeTab === tab.name && styles.activeIcon,
+              ]}
+            >
+              <Ionicons
+                name={tab.icon as any}
+                size={22}
+                color={activeTab === tab.name ? "#075E54" : "#54656F"}
+              />
+            </View>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
+            <Text
+              style={[
+                styles.navLabel,
+                activeTab === tab.name && styles.activeLabel,
+              ]}
+            >
+              {tab.name}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    backgroundColor: "#FFFFFF",
   },
-  safeArea: {
+
+  screen: {
     flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
   },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
+
+  bottomNav: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    paddingTop: 8,
+    paddingBottom: 8,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: "#E0E0E0",
+    backgroundColor: "#FFFFFF",
+  },
+
+  navItem: {
     flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 3,
   },
-  title: {
-    textAlign: 'center',
+
+  iconContainer: {
+    paddingHorizontal: 14,
+    paddingVertical: 4,
+    borderRadius: 20,
   },
-  code: {
-    textTransform: 'uppercase',
+
+  activeIcon: {
+    backgroundColor: "#D9FDD3",
   },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
+
+  navLabel: {
+    fontSize: 11,
+    color: "#54656F",
+  },
+
+  activeLabel: {
+    color: "#075E54",
+    fontWeight: "700",
   },
 });
